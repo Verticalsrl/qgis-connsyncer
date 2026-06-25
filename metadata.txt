@@ -1,0 +1,24 @@
+[general]
+name=ConnSyncer
+qgisMinimumVersion=3.16
+qgisMaximumVersion=4.99
+description=Shows all DB datasources active in the current QGIS project and lets you register them in DB Manager with a single click. Supports GeoPackage, SpatiaLite and PostgreSQL.
+version=1.3.1
+author=Vertical Srl
+email=info@vertical-srl.it
+about=When you load a layer from a GeoPackage, SpatiaLite or PostgreSQL database, QGIS uses it as a layer source but does not automatically add it to the DB Manager connections. This plugin scans the current project, lists every DB datasource it finds and lets you register them in DB Manager with a single click, choosing the connection name. No more manual reconfiguration of each connection.
+license=GPL-2.0-or-later
+tracker=https://github.com/verticalsrl/qgis-connsyncer/issues
+repository=https://github.com/verticalsrl/qgis-connsyncer
+homepage=https://github.com/verticalsrl/qgis-connsyncer
+category=Database
+icon=icon.png
+experimental=False
+deprecated=False
+tags=database,geopackage,spatialite,postgresql,postgis,db manager,connections,sync
+changelog=
+    1.3.1 - GPL-2.0 license, source license headers, README, metadata cleanup
+    1.3.0 - About dialog, database icon, English UI
+    1.2.0 - Editable connection name before saving
+    1.1.0 - QGIS 4.x / Qt6 compatibility (fully-qualified enums, exec())
+    1.0.0 - First release: GeoPackage, SpatiaLite, PostgreSQL
