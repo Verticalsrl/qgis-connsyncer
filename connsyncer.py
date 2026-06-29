@@ -21,30 +21,31 @@ with this program; if not, see <https://www.gnu.org/licenses/>.
 
 import os
 from qgis.core import QgsProject, QgsMessageLog, Qgis
-from qgis.PyQt.QtCore import QSettings, Qt, QUrl
+from qgis.PyQt.QtCore import QSettings, Qt
 from qgis.PyQt.QtWidgets import (
     QAction, QDialog, QVBoxLayout, QHBoxLayout, QLabel,
     QPushButton, QTableWidget, QTableWidgetItem, QHeaderView,
     QCheckBox, QWidget, QAbstractItemView, QFrame
 )
-from qgis.PyQt.QtGui import QIcon, QColor, QDesktopServices
+from qgis.PyQt.QtGui import QIcon, QColor
 
 LOG_TAG = "ConnSyncer"
+
 
 # ---------------------------------------------------------------------------
 # Qt5 / Qt6 enum compatibility
 # ---------------------------------------------------------------------------
 def _qt_enum(cls, name):
     _map = {
-        'AlignCenter':      ('Qt', 'AlignmentFlag'),
-        'SelectRows':       ('QAbstractItemView', 'SelectionBehavior'),
-        'NoEditTriggers':   ('QAbstractItemView', 'EditTrigger'),
-        'DoubleClicked':    ('QAbstractItemView', 'EditTrigger'),
+        'AlignCenter': ('Qt', 'AlignmentFlag'),
+        'SelectRows': ('QAbstractItemView', 'SelectionBehavior'),
+        'NoEditTriggers': ('QAbstractItemView', 'EditTrigger'),
+        'DoubleClicked': ('QAbstractItemView', 'EditTrigger'),
         'ResizeToContents': ('QHeaderView', 'ResizeMode'),
-        'Stretch':          ('QHeaderView', 'ResizeMode'),
-        'Interactive':      ('QHeaderView', 'ResizeMode'),
-        'UserRole':         ('Qt', 'ItemDataRole'),
-        'ItemIsEditable':   ('Qt', 'ItemFlag'),
+        'Stretch': ('QHeaderView', 'ResizeMode'),
+        'Interactive': ('QHeaderView', 'ResizeMode'),
+        'UserRole': ('Qt', 'ItemDataRole'),
+        'ItemIsEditable': ('Qt', 'ItemFlag'),
     }
     sub = _map.get(name)
     if sub:
@@ -60,12 +61,12 @@ def log(msg, level=Qgis.Info):
     QgsMessageLog.logMessage(msg, LOG_TAG, level)
 
 
-COL_CHK    = 0
-COL_NAME   = 1
-COL_TYPE   = 2
+COL_CHK = 0
+COL_NAME = 1
+COL_TYPE = 2
 COL_DETAIL = 3
 
-VERSION = "1.3.1"
+VERSION = "1.3.2"
 
 
 # ==========================================================================
@@ -229,8 +230,9 @@ class AboutDialog(QDialog):
         header.addSpacing(10)
         title_block = QVBoxLayout()
         title_lbl = QLabel("<b style='font-size:14px'>ConnSyncer</b>")
-        version_lbl = QLabel(f"<span style='color:#666'>Version: {VERSION} &nbsp;·&nbsp; Author: Vertical Srl — "
-                              "<a href='https://vertical-srl.it'>vertical-srl.it</a></span>")
+        version_lbl = QLabel(
+            f"<span style='color:#666'>Version: {VERSION} &nbsp;·&nbsp; Author: Vertical Srl — "
+            "<a href='https://vertical-srl.it'>vertical-srl.it</a></span>")
         version_lbl.setOpenExternalLinks(True)
         title_block.addWidget(title_lbl)
         title_block.addWidget(version_lbl)
@@ -334,9 +336,9 @@ class SyncDialog(QDialog):
             ["Save", "Connection name", "Type", "Path / Host"]
         )
         hh = self.table.horizontalHeader()
-        hh.setSectionResizeMode(COL_CHK,    _qt_enum(QHeaderView, 'ResizeToContents'))
-        hh.setSectionResizeMode(COL_NAME,   _qt_enum(QHeaderView, 'Interactive'))
-        hh.setSectionResizeMode(COL_TYPE,   _qt_enum(QHeaderView, 'ResizeToContents'))
+        hh.setSectionResizeMode(COL_CHK, _qt_enum(QHeaderView, 'ResizeToContents'))
+        hh.setSectionResizeMode(COL_NAME, _qt_enum(QHeaderView, 'Interactive'))
+        hh.setSectionResizeMode(COL_TYPE, _qt_enum(QHeaderView, 'ResizeToContents'))
         hh.setSectionResizeMode(COL_DETAIL, _qt_enum(QHeaderView, 'Stretch'))
         self.table.setColumnWidth(COL_NAME, 200)
         self.table.setEditTriggers(_qt_enum(QAbstractItemView, 'DoubleClicked'))
